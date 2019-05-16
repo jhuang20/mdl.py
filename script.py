@@ -59,7 +59,7 @@ def run(filename):
     reflect = '.white'
     ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save', 'circle', 'bezier', 'hermite', 'box', 'sphere', 'torus' ]
     for command in commands:
-        step_3d=40
+        step_3d=100
         step=100
         line=command['op']
         #if command['constant']
@@ -73,7 +73,8 @@ def run(filename):
                        float(args[0]), float(args[1]), float(args[2]),
                        float(args[3]), step_3d)
             matrix_mult( systems[-1], polygons )
-            draw_polygons(polygons, screen, zbuffer, view, ambient, light, symbols, reflect)
+            c ='.white' if command['constants'] is None else command['constants'] #default unless otherwise specified
+            draw_polygons(polygons, screen, zbuffer, view, ambient, light,symbols, c)
             polygons = []
 
         elif line == 'torus':
@@ -82,7 +83,8 @@ def run(filename):
                       float(args[0]), float(args[1]), float(args[2]),
                       float(args[3]), float(args[4]), step_3d)
             matrix_mult( systems[-1], polygons )
-            draw_polygons(polygons, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+            c ='.white' if command['constants'] is None else command['constants'] #default unless otherwise specified
+            draw_polygons(polygons, screen, zbuffer, view, ambient, light,symbols, c)
             polygons = []
 
         elif line == 'box':
@@ -91,7 +93,8 @@ def run(filename):
                     float(args[0]), float(args[1]), float(args[2]),
                     float(args[3]), float(args[4]), float(args[5]))
             matrix_mult( systems[-1], polygons )
-            draw_polygons(polygons, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+            c ='.white' if command['constants'] is None else command['constants'] #default unless otherwise specified
+            draw_polygons(polygons, screen, zbuffer, view, ambient, light,symbols, c)
             polygons = []
 
         elif line == 'circle':
